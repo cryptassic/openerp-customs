@@ -1,0 +1,33 @@
+#aux
+sudo make distclean
+
+
+#Install openssl
+git clone git://git.openssl.org/openssl.gi
+cd openssl/
+./config --prefix=/usr --openssldir=/etc/ssl --libdir=lib shared zlib-dynamic -Wl,-rpath=/usr/local/ssl -Wl,--enable-new-dtags
+make
+make test
+sudo make install
+
+
+
+
+
+
+
+# Python source website : https://www.python.org/downloads/source/
+sudo apt-get install libffi-dev libgdbm-dev libsqlite3-dev libssl-dev zlib1g-dev
+wget https://www.python.org/ftp/python/3.10.2/Python<version>.tgz
+tar -xf Python<version>.tgz
+cd Python<version>
+./configure \
+    --prefix=/opt/python/3.10.2 \
+    --enable-shared \
+    --enable-ipv6 \
+    LDFLAGS=-Wl,-rpath=/opt/python/3.10.2/lib,--disable-new-dtags
+make
+sudo make install
+
+curl -O https://bootstrap.pypa.io/get-pip.py
+sudo /opt/python/${PYTHON_VERSION}/bin/python${PYTHON_MAJOR} get-pip.py
